@@ -14,7 +14,7 @@
     <h1 class="main-title">Typescript Kanban</h1>
 
     <main class="todo-container">
-      <section class="board">
+      <!-- <section class="board" id="to-do">
         <section class="board-title">
           <div class="board-header">
             <div class="total"><span id="todo-count">0</span></div>
@@ -43,29 +43,34 @@
         </section>
 
         <section class="todo">
-          <div class="todo-item">
-            <div class="item-header">
-              <div class="item-title">
-                <span class="item-title-icon"></span>
-                <div class="add-title" contenteditable>제목</div>
-              </div>
-              <div class="todo-control">
-                <button><span class="delete-btn"></span></button>
-              </div>
-            </div>
-
-            <div class="add-content" contenteditable>내용</div>
-          </div>
-        </section>
-
-        <section class="todo">
-          <button class="todo-item add">
+          <button class="todo-item add" id="add-todo">
             <span class="plus-btn blue"></span>
           </button>
-        </section>
-      </section>
+        </section> -->
 
-      <section class="board">
+      <!-- 
+        <section class="todo" id="add-item">
+          <div class="todo-item add-item">
+            <div>
+              <div class="item-header">
+                <div class="item-title">
+                  <span class="item-title-icon"></span>
+                  <div class="title add-title" contenteditable>제목</div>
+                </div>
+              </div>
+              <div class="todo-content add-content" contenteditable>내용</div>
+            </div>
+
+            <div class="todo-control">
+              <button class="cancel">Cancel</button>
+              <button class="add">Add Item</button>
+            </div>
+          </div>
+        </section> -->
+
+      <!-- </section>
+
+      <section class="board" id="in-progress">
         <div class="board-title">
           <div class="board-header">
             <div class="total"><span id="todo-count">0</span></div>
@@ -76,9 +81,15 @@
             <button><span class="delete-btn"></span></button>
           </div>
         </div>
+
+        <section class="todo">
+          <button class="todo-item add" id="add-todo">
+            <span class="plus-btn blue"></span>
+          </button>
+        </section>
       </section>
 
-      <section class="board">
+      <section class="board" id="done">
         <div class="board-title">
           <div class="board-header">
             <div class="total"><span id="todo-count">0</span></div>
@@ -89,11 +100,17 @@
             <button><span class="delete-btn"></span></button>
           </div>
         </div>
+
+        <section class="todo">
+          <button class="todo-item add" id="add-todo">
+            <span class="plus-btn blue"></span>
+          </button>
+        </section>
       </section>
 
       <button class="board add">
         <span class="plus-btn blue"></span>
-      </button>
+      </button> -->
     </main>
     <script src="./build/bundle.js"></script>
     <script>

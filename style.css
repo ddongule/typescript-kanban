@@ -175,6 +175,14 @@ input[type='text'] {
   width: 100%;
 }
 
+.wrapper {
+  width: 100%;
+}
+
+.todo-container .board .todo:last-child {
+  margin-bottom: 30px;
+}
+
 .todo-container .board .todo .todo-item {
   border: 1px solid #f5f7ff;
   border-radius: 12px;
@@ -184,9 +192,30 @@ input[type='text'] {
   min-height: 150px;
 }
 
+.todo-container .board .todo .todo-item.add-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.todo-container .board .todo .todo-item.add-item > * {
+  width: 100%;
+}
+
+.todo-container .board .todo .todo-item.add-item .todo-control {
+  display: flex;
+  gap: 6px;
+}
+
+.todo-container .board .todo .todo-item.add-item .todo-control > * {
+  width: 100%;
+}
+
 .add {
   width: 100%;
   border: 1px solid rgb(191, 201, 255) !important;
+  min-height: 10px !important;
 }
 
 .add:hover,
@@ -224,7 +253,6 @@ input[type='text'] {
 }
 
 .todo-container .board .todo .todo-item .add-content {
-  margin-top: 10px;
   color: #a0a0a0;
 }
 
