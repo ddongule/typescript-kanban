@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/systemjs@2.1.1/dist/s.js"></script>
+    <script src="https://unpkg.com/systemjs@2.1.1/dist/extras/named-register.js"></script>
+    <link rel="stylesheet" type="text/css" href="./style.css" />
+
+    <title>Todo</title>
+  </head>
+  <body>
+    <h1 class="main-title">Typescript Kanban</h1>
+
+    <main class="todo-container">
+      <section class="board">
+        <section class="board-title">
+          <div class="board-header">
+            <div class="total"><span id="todo-count">0</span></div>
+            <h2 class="title">To do</h2>
+          </div>
+
+          <div class="board-control">
+            <button><span class="delete-btn"></span></button>
+          </div>
+        </section>
+
+        <section class="todo">
+          <div class="todo-item">
+            <div class="item-header">
+              <div class="item-title">
+                <span class="item-title-icon"></span>
+                <div class="title">안녕하세요</div>
+              </div>
+              <div class="todo-control">
+                <button><span class="delete-btn"></span></button>
+              </div>
+            </div>
+
+            <div class="todo-content">해아할 일 1</div>
+          </div>
+        </section>
+
+        <section class="todo">
+          <div class="todo-item">
+            <div class="item-header">
+              <div class="item-title">
+                <span class="item-title-icon"></span>
+                <div class="add-title" contenteditable>제목</div>
+              </div>
+              <div class="todo-control">
+                <button><span class="delete-btn"></span></button>
+              </div>
+            </div>
+
+            <div class="add-content" contenteditable>내용</div>
+          </div>
+        </section>
+
+        <section class="todo">
+          <button class="todo-item add">
+            <span class="plus-btn blue"></span>
+          </button>
+        </section>
+      </section>
+
+      <section class="board">
+        <div class="board-title">
+          <div class="board-header">
+            <div class="total"><span id="todo-count">0</span></div>
+            <h2 class="title">In progress</h2>
+          </div>
+
+          <div class="board-control">
+            <button><span class="delete-btn"></span></button>
+          </div>
+        </div>
+      </section>
+
+      <section class="board">
+        <div class="board-title">
+          <div class="board-header">
+            <div class="total"><span id="todo-count">0</span></div>
+            <h2 class="title">Done</h2>
+          </div>
+
+          <div class="board-control">
+            <button><span class="delete-btn"></span></button>
+          </div>
+        </div>
+      </section>
+
+      <button class="board add">
+        <span class="plus-btn blue"></span>
+      </button>
+    </main>
+    <script src="./build/bundle.js"></script>
+    <script>
+      System.import('index');
+    </script>
+  </body>
+</html>

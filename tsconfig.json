@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "module": "system",
+    "outFile": "./build/bundle.js",
+    "target": "es6",
+    "sourceMap": true
+  },
+  "include": ["./*"]
+}
