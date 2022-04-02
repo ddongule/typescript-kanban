@@ -2,6 +2,11 @@ import { defaultKanban } from './mock';
 
 type TodoCategory = 'to-do' | 'in-progress' | 'done';
 
+type tag = {
+  id: number;
+  content: string;
+};
+
 export type TodoItem = {
   id: number;
   category: TodoCategory;
@@ -10,7 +15,7 @@ export type TodoItem = {
     body: string;
   };
   isDone: boolean;
-  tags?: string[];
+  tags?: tag[];
 };
 
 export type KanbanItem = {
@@ -59,23 +64,42 @@ export default class Kanban {
       </section>`;
 
     const todoHTML = todos
-      .map(({ id, content }) => {
+      .map(({ id: todoId, content, tags }) => {
         return `
-        <section class="todo" id="${title}+${id ?? 0}">
+        <section class="todo" id="${title}+${todoId}">
           <div class="todo-item">
-            <div class="item-header">
-              <div class="item-title">
-                <span class="item-title-icon"></span>
-                <div class="title">${content ? content.title : ''}</div>
+            <div class="wrapper">
+              <div class="item-header">
+                <div class="item-title">
+                  <span class="item-title-icon"></span>
+                  <div class="title">${content ? content.title : ''}</div>
+                </div>
+                <div class="todo-control" >
+                  <button class='delete-item' id="delete-todo-${todoId}">
+                    <span class="delete-btn"></span>
+                  </button>
+                </div>
               </div>
-              <div class="todo-control" >
-                <button class='delete-item' id="delete-todo-${id ?? 0}">
-                  <span class="delete-btn"></span>
-                </button>
-              </div>
+
+              <div class="todo-content">${content ? content.body : ''}</div>
             </div>
 
-            <div class="todo-content">${content ? content.body : ''}</div>
+            <div class="tags">
+              ${tags
+                .map(({ id: tagId, content }) => {
+                  return `<span class="tag" id="tag-${todoId}">
+                            ${content} 
+                            <button class='delete-tag delete-btn' id="todo-delete-${tagId}"></button>
+                          </span>`;
+                })
+                .join('')}
+              
+              <div class="tag add-tag-btn">
+                <span contentEditable>태그</span>
+                <button class="add-btn" id="todo-${todoId}"></button>
+              </div>
+              
+            </div>
           </div>
         </section>
       `;
@@ -119,8 +143,8 @@ export default class Kanban {
             </div>
           </div>
           <div class="todo-content add-content" contentEditable>내용</div>
+          
         </div>
-
         <div class="todo-control">
           <button class="cancel">Cancel</button>
           <button class="add">Add Item</button>
@@ -151,7 +175,7 @@ export default class Kanban {
         content: { title, body },
         isDone: false,
         category: category as TodoItem['category'],
-        tags: ['태그1'],
+        tags: [],
       };
 
       const todos = [...this.kanbanList[kanbanId].todos, newTodo];
@@ -181,6 +205,52 @@ export default class Kanban {
     const $kanbanDeleteBtn = document.querySelectorAll('.kanban-delete');
     const $todoAddBtn = document.querySelectorAll('.todo-item.add');
     const $todoDeleteBtn = document.querySelectorAll('.delete-item');
+    const $tagAddBtn = document.querySelectorAll('.add-btn');
+    const $tagDeleteBtn = document.querySelectorAll('.delete-tag');
+
+    $tagDeleteBtn.forEach((btn) => {
+      btn.addEventListener('click', ({ currentTarget }) => {
+        if (!(currentTarget instanceof HTMLButtonElement)) return;
+
+        const category = currentTarget.closest('.todo').id.split('+')[0];
+
+        const todoId = Number(currentTarget.closest('.tag').id.split('tag-')[1]);
+        const tagId = Number(currentTarget.id.split('todo-delete')[1]);
+
+        const kanbanId = this.kanbanList.findIndex((kanban) => kanban.title === category);
+        const targetKanban = this.kanbanList.find((kanban) => kanban.title === category);
+        const todo = targetKanban.todos.find((todo) => todo.id === todoId);
+        const todoIndex = targetKanban.todos.findIndex((todo) => todo.id === todoId);
+
+        const newTags = todo.tags.filter((tag) => tag.id !== tagId);
+
+        this.kanbanList[kanbanId].todos[todoIndex].tags = newTags;
+        this.renderKanban(this.kanbanList);
+      });
+    });
+
+    $tagAddBtn.forEach((btn) => {
+      btn.addEventListener('click', ({ currentTarget }) => {
+        if (!(currentTarget instanceof HTMLButtonElement)) return;
+
+        const category = currentTarget.closest('.todo').id.split('+')[0];
+        const id = Number(currentTarget.id.split('todo-')[1]);
+
+        const kanbanId = this.kanbanList.findIndex((kanban) => kanban.title === category);
+        const targetKanban = this.kanbanList.find((kanban) => kanban.title === category);
+        const todo = targetKanban.todos.find((todo) => todo.id === id);
+        const todoIndex = targetKanban.todos.findIndex((todo) => todo.id === id);
+
+        const newId = todo.tags.length > 0 ? todo.tags[todo.tags.length - 1].id + 1 : 0;
+        todo.tags.push({
+          id: newId,
+          content: currentTarget.closest('.tag').querySelector('span').textContent,
+        });
+
+        this.kanbanList[kanbanId].todos.splice(todoIndex, 1, todo);
+        this.renderKanban(this.kanbanList);
+      });
+    });
 
     $kanbanAddBtn.addEventListener('click', () => {
       const newId =

@@ -6,7 +6,7 @@ export const todoList: TodoItem[] = [
     content: { title: '제목', body: '내용' },
     isDone: false,
     category: 'to-do',
-    tags: ['태그1'],
+    tags: [{ id: 0, content: '태그1' }],
   },
 ];
 
@@ -16,7 +16,7 @@ export const inProgressList: TodoItem[] = [
     content: { title: '제목', body: '내용' },
     isDone: false,
     category: 'in-progress',
-    tags: ['태그1'],
+    tags: [{ id: 0, content: '태그1' }],
   },
 ];
 
@@ -26,7 +26,7 @@ export const doneList: TodoItem[] = [
     content: { title: '제목', body: '내용' },
     isDone: false,
     category: 'done',
-    tags: ['태그1'],
+    tags: [{ id: 0, content: '태그1' }],
   },
 ];
 

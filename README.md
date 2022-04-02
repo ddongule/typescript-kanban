@@ -1,4 +1,4 @@
-<img src='./assets/images/readme_preview_1.png'>
+<img src='./assets/images/readme_preview.png'>
 
 # 💫 Typescript Kanban Practice!
 
